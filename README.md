@@ -10,7 +10,7 @@ By default, the application currently deploys 5 tokens (1 base WETH token, and 4
 
 The application deploys the Uniswap V2 Core contracts. From the Uniswap V2 Periphery, the application only deploys the Uniswap V2 Router02. Uniswap V2 Router01 is deprecated. The original Migrator contract from the V2 Periphery is also ignored; this file relates to V1 to V2 migration, which we do not require.
 
-## Getting Started wtih Default Local Development
+## Getting Started with the Default Local Development Environment
 
 The following will deploy the Uniswap V2 contracts and 5 token contracts to a local blockchain running on Anvil
 
