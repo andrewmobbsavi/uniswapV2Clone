@@ -7,8 +7,7 @@ Adds token to the blockchain
 def deployToken(tokenName, tokenCode, tokenDecimals, privateKey, endpoint, separator):
     print(separator)
     print(f"Creating {tokenName} token ({tokenCode})")
-    output = os.popen(f"cd ../erc20; forge create --rpc-url {endpoint} --private-key {privateKey} src/Token.sol:Token 
-                      --constructor-args '{tokenName}' '{tokenCode}' {tokenDecimals}").read()
+    output = os.popen(f"cd ../erc20; forge create --rpc-url {endpoint} --private-key {privateKey} src/Token.sol:Token --constructor-args '{tokenName}' '{tokenCode}' {tokenDecimals}").read()
     
     print(f"{tokenName} token deployed...")
 
@@ -45,8 +44,7 @@ def deployV2erc20(endpoint, privateKey, separator):
 def deployV2Factory(endpoint, privateKey, feeRecipient, separator):
     print(separator)
     print(f"Deploying the Uniswap V2 Core UniswapV2Factory Contract...")
-    output = os.popen(f"cd ../uniswapv2core; forge create --rpc-url {endpoint} --private-key {privateKey} src/UniswapV2Factory.sol:UniswapV2Factory 
-                      --constructor-args '{feeRecipient}'").read()
+    output = os.popen(f"cd ../uniswapv2core; forge create --rpc-url {endpoint} --private-key {privateKey} src/UniswapV2Factory.sol:UniswapV2Factory --constructor-args '{feeRecipient}'").read()
     print(f"Uniswap V2 UniswapV2Factory Core Contract deployed...")
     return output
 
@@ -91,8 +89,7 @@ def deployV2Periphery(endpoint, privateKey, factoryAddress, wethAddress, utilsCu
     print(separator)
     print(f"Deploying the Uniswap V2 Core Router2 Contract...")
 
-    UniswapV2Router02Output = os.popen(f"cd ../uniswapv2periphery; forge create --rpc-url {endpoint} --private-key {privateKey} 
-                                       src/UniswapV2Router02.sol:UniswapV2Router02 --constructor-args '{factoryAddress}' '{wethAddress}'").read()
+    UniswapV2Router02Output = os.popen(f"cd ../uniswapv2periphery; forge create --rpc-url {endpoint} --private-key {privateKey} src/UniswapV2Router02.sol:UniswapV2Router02 --constructor-args '{factoryAddress}' '{wethAddress}'").read()
     print(f"Uniswap V2 Periphery UniswapV2Router02 Core Contract deployed...")
 
     v2Periphery = {
