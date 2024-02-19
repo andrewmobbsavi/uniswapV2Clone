@@ -28,7 +28,7 @@ def deployTokens(utilsCustom, tokenDefinitions, privateKey, endpoint, separator)
             "tokenDecimals": token["tokenDecimals"],
             "contractAddress": tokenAddress
     })
-        
+
     return tokens
 
 """
@@ -48,6 +48,7 @@ def deployV2Factory(endpoint, privateKey, feeRecipient, separator):
     print(f"Uniswap V2 UniswapV2Factory Core Contract deployed...")
     return output
 
+
 def deployV2Pair(endpoint, privateKey, separator):
     print(separator)
     print(f"Deploying the Uniswap V2 Core UniswapV2Pair Contract...")
@@ -62,16 +63,16 @@ def deployV2CoreContracts(utilsCustom, endpoint, privateKey, feeRecipient, separ
     coreV2PairOutput = deployV2Pair(endpoint, privateKey, separator)
 
     v2Core = {
-            "UniswapV2ERC20": {
-                "contractAddress": utilsCustom.getDeploymentAddress(coreV2Erc20Output)
-            },
-            "UniswapV2Factory": {
-                "contractAddress": utilsCustom.getDeploymentAddress(coreV2FactoryOutput)
-            },
-            "UniswapV2Pair": {
-                "contractAddress": utilsCustom.getDeploymentAddress(coreV2PairOutput)
-            },
+        "UniswapV2ERC20": {
+            "contractAddress": utilsCustom.getDeploymentAddress(coreV2Erc20Output)
+        },
+        "UniswapV2Factory": {
+            "contractAddress": utilsCustom.getDeploymentAddress(coreV2FactoryOutput)
+        },
+        "UniswapV2Pair": {
+            "contractAddress": utilsCustom.getDeploymentAddress(coreV2PairOutput)
         }
+    }
 
     return v2Core
 
