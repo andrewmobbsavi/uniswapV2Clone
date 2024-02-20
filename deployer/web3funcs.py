@@ -13,7 +13,7 @@ def getAbi(abiPath):
     return abi
 
 #https://docs.moonbeam.network/builders/build/eth-api/libraries/web3py/
-def test(address_to):
+def mintToken(address_to):
     tokenabi = getAbi("../erc20/out/Token.sol/Token.json")
 
 

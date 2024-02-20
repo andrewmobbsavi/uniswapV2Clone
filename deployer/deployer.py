@@ -66,8 +66,10 @@ def main():
         elif menu == "2": #Mint Tokens
             if contracts:
                 print("Minting tokens and assigning to owner account\n")
-                print(contracts[0][0]['contractAddress'])
-                web3funcs.test(contracts[0][0]['contractAddress'])
+                
+                for contract in contracts[0]:
+                    print("Minting " + contract['tokenCode'] + " from " + contract['contractAddress'])  
+                    web3funcs.mintToken(contract['contractAddress'])
             else:
                 print("No DEX addresses found. Please choose option 1.\n")
                 main()
