@@ -4,6 +4,10 @@ import utilsCustom
 import tokenDefinitions
 import web3funcs
 
+'''
+This will generate the abi only for the selected file
+forge build --silent && jq '.abi' ./out/MyContract.sol/MyContract.json
+'''
 
 def deployContracts():
     print(f"Deploying DEX and test tokens to . Each step may take a while if running for the first time because the various compilers need to be downloaded.")
@@ -62,6 +66,7 @@ def main():
         elif menu == "2": #Mint Tokens
             if contracts:
                 print("Minting tokens and assigning to owner account\n")
+                print(contracts[0][0]['contractAddress'])
                 web3funcs.test(contracts[0][0]['contractAddress'])
             else:
                 print("No DEX addresses found. Please choose option 1.\n")
