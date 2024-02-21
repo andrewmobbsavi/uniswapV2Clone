@@ -3,6 +3,7 @@ import chainfuncs
 import utilsCustom
 import tokenDefinitions
 import web3funcs
+import time
 
 '''
 This will generate the abi only for the selected file
@@ -44,6 +45,27 @@ def deployContracts():
     return tokenContracts, v2CoreContracts, v2PeripheryContracts
 
 
+def mintTokens(contracts):
+    if contracts:
+        print("Minting tokens and assigning to owner account\n")
+        
+        for contract in contracts[0]:
+            print("Minting " + contract['tokenCode'] + " from " + contract['contractAddress'])  
+            web3funcs.mintToken(contract['contractAddress'], "../erc20/out/Token.sol/Token.json")
+
+        return True
+    else:
+        print("\n\nERROR!\n\nNo DEX addresses found. Please choose option 1.\n\n")
+        return False
+
+
+
+
+def addLiquidity():
+    deadline = int(time.time())
+    deadline += 30
+    web3funcs.addLiquidity(contractAddress, tokenA, tokenB, amountADesired, amountBDesired, amountAMin, amountBMin, recipientAddress, deadline, abiLocation)
+
 
 
 def main():
@@ -58,24 +80,18 @@ def main():
         menu = str(input("Pick an option:\n\n"
                         "1. Deploy DEX contracts to local test environment\n"
                         "2. Mint tokens and assign to owner account " + constants.FEE_RECIPIENT + "\n"
-                        "3. Start auto background trading on local test environment\n"
+                        "3. Create pair liquidity pools and assign to owner account " + constants.FEE_RECIPIENT + "\n"
+                        "4. Start auto background trading on local test environment\n"
                         "x. Exit\n"
                         "\nOption Selected: "))
         if menu == "1":
             contracts = deployContracts()
         elif menu == "2": #Mint Tokens
-            if contracts:
-                print("Minting tokens and assigning to owner account\n")
-                
-                for contract in contracts[0]:
-                    print("Minting " + contract['tokenCode'] + " from " + contract['contractAddress'])  
-                    web3funcs.mintToken(contract['contractAddress'])
-            else:
-                print("No DEX addresses found. Please choose option 1.\n")
+            if not mintTokens(contracts):
                 main()
         elif menu == "3":
-            print("Running auto background trading\n")
-            web3funcs.getAbi("../erc20/out/Token.sol/Token.json")
+            print("Creating pair liquidity pools\n")
+            addLiquidity()
         elif menu == "x":
             print("Exiting...")
             runme = False
